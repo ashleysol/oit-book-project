@@ -1,2 +1,2 @@
-# oit-book-project
-Book/movie comparison project for Out In Tech mentorship program
+# oit-to-do-today
+Visual to-do list for Out In Tech mentorship program
