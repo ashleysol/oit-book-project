@@ -1,0 +1,85 @@
+.task {
+  background-color: #FCF29C;  /* Sticky note yellow */
+  padding: 20px;
+  margin: 10px 0px;
+  border-radius: 6px;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.3);
+  min-height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  word-wrap: break-word;
+  font-size: 1.5vw;
+}
+
+.color-option{
+  all: unset;
+  width:50px;
+  height: 50px;
+  background-color: white;
+  display: block;
+  margin: 10px 0px;
+}
+
+.time-option{
+  all: unset;
+  width:50px;
+  height: 50px;
+  background-color: #F5F5F5;
+  border: solid 1px #91693A;
+  border-radius: 15px;
+  color:#91693A;
+  text-align: center;
+  font-weight: 500;
+  display: block;
+  margin: 10px 0px;
+}
+
+.selected-fill{
+  background-color: #91693A;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.selected-outline{
+  border: solid 1px #91693A;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+}
+
+.button{
+  background-color: #91693A;
+  color: white;
+  font-weight: 500;
+
+}
+.button:hover{
+  background-color: #7f521e;
+  border: solid 1px #643f14;
+}
+
+input{
+  border: solid 2px #91693A;
+  border-radius: 5px;
+  width:80%;
+  height: 40px;
+}
+
+input:focus{
+  outline: none;
+  border-color: #7f521e;
+}
+
+#trash{
+  width: 50px;
+  height: 50px;
+  font-size: 50px;
+  margin-top: 20px;
+}
+
+#trash-div{
+  text-align: center;
+}
+
+.rotated{
+  transform: rotate(180deg);
+}

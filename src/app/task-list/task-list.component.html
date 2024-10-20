@@ -1,0 +1,71 @@
+<div class="container-fluid px-5 my-2">
+  <div class="row">
+    <div class="col-6">
+      <h4>{{ location }} - {{ temp }}</h4>
+      <form (ngSubmit)="addTask(task)" class="mt-5">
+        <input class="mx-2 px-2" [(ngModel)]="task" name="task" placeholder="today I will..." />
+        <button class="btn button">Add</button>
+      </form>
+    </div>
+    <div class="col" id="trash-div" (mouseup)="trash()">
+      <mat-icon id="trash" aria-hidden="false" aria-label="Delete task" 
+      fontIcon="delete_forever"></mat-icon>
+    </div>
+  </div>
+
+  <div (click)="setAdvanced()">
+    <p style="display:inline-block" class="pb-2">Advanced</p> 
+    <div style="display:inline">   
+     <mat-icon aria-hidden="false" aria-label="Show settings" 
+      fontIcon="expand_more" [ngClass]="{'rotated':isAdvancedOpen}"></mat-icon>
+    </div>   
+  </div>
+  <div class="row">
+    <div id="advanced-container" class="col-2" *ngIf="isAdvancedOpen">
+      <div class="row">
+        <div class="col-6">
+          <button
+            *ngFor="let c of colors"
+            class="color-option"
+            [ngStyle]="{ 'background-color': c }"
+            [ngClass]="{ 'selected-outline': c === color }"
+            (click)="setColor(c)"
+          ></button>
+        </div>
+        <div class="col-6">
+          <button
+            *ngFor="let t of times"
+            class="time-option"
+            [ngClass]="{ 'selected-fill': t.time === time }"
+            (click)="setTime(t.time)"
+          >
+            {{ t.text }}
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col my-3" (click)="save()">
+          <button class="btn button">Save Progress</button>
+        </div>
+      </div>
+    </div>
+    <div id="tasks-container" class="col">
+      <div
+        class="row"
+        cdkDropList
+        cdkDropListOrientation="mixed"
+        (cdkDropListDropped)="drop($event)"
+      >
+        <div
+          *ngFor="let task of taskList"
+          [ngClass]="getColSize(task.time)"
+          cdkDrag
+        >
+          <div class="task" [ngStyle]="{ 'background-color': task.color }">
+            {{ task.text }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
