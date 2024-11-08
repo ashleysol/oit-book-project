@@ -43,8 +43,8 @@
                 },
                 {
                   "type": "anyComponentStyle",
-                  "maximumWarning": "2kB",
-                  "maximumError": "4kB"
+                  "maximumWarning": "1mb",
+                  "maximumError": "2mb"
                 }
               ],
               "outputHashing": "all"
@@ -67,7 +67,10 @@
               "buildTarget": "to-do-today:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "proxyConfig": "src/proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n"

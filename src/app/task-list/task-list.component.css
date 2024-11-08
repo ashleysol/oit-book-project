@@ -83,3 +83,9 @@ input:focus{
 .rotated{
   transform: rotate(180deg);
 }
+
+.tl{
+  border: solid 1px white;
+  background-color: #FFF7E7;
+  height: 200px;
+}

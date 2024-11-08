@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
-import { WeatherService } from '../weather-service/weather.service';
+import { WeatherService } from '../services/weather-service/weather.service';
 import { Task } from '../classes/task.model';
 import {CdkDragDrop, CdkDrag, CdkDropList, moveItemInArray} from '@angular/cdk/drag-drop';
 import {MatIconModule} from '@angular/material/icon';
+import { DatabaseService } from '../services/database-service/database.service';
 
 @Component({
   selector: 'app-task-list',
@@ -34,7 +35,7 @@ export class TaskListComponent {
   toDelete: boolean = false;
   
 
-  constructor(private weatherService: WeatherService){}
+  constructor(private weatherService: WeatherService, private dbService: DatabaseService){}
 
   ngOnInit(){
     //Get weather location or display default location weather
@@ -89,15 +90,15 @@ export class TaskListComponent {
 
   getColSize(t:number): string{
     if(t == 60){
-      return 'col-6'
+      return 'col-4'
     }
     else if(t == 90){
-      return 'col-9'
+      return 'col-6'
     }
     else if(t == 120){
-      return 'col-12 col-lg-6'
+      return 'col-8'
     }
-    return 'col-3';
+    return 'col-2';
   }
 
   setColor(c:string){this.color = c;}
