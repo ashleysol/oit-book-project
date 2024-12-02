@@ -3,22 +3,35 @@
     <div class="col-6">
       <h4>{{ location }} - {{ temp }}</h4>
       <form (ngSubmit)="addTask(task)" class="mt-5">
-        <input class="mx-2 px-2" [(ngModel)]="task" name="task" placeholder="today I will..." />
+        <input
+          class="mx-2 px-2"
+          [(ngModel)]="task"
+          name="task"
+          placeholder="today I will..."
+        />
         <button class="btn button">Add</button>
       </form>
     </div>
     <div class="col" id="trash-div" (mouseup)="trash()">
-      <mat-icon id="trash" aria-hidden="false" aria-label="Delete task" 
-      fontIcon="delete_forever"></mat-icon>
+      <mat-icon
+        id="trash"
+        aria-hidden="false"
+        aria-label="Delete task"
+        fontIcon="delete_forever"
+      ></mat-icon>
     </div>
   </div>
 
   <div (click)="setAdvanced()">
-    <p style="display:inline-block" class="pb-2">Advanced</p> 
-    <div style="display:inline">   
-     <mat-icon aria-hidden="false" aria-label="Show settings" 
-      fontIcon="expand_more" [ngClass]="{'rotated':isAdvancedOpen}"></mat-icon>
-    </div>   
+    <p style="display: inline-block" class="pb-2">Advanced</p>
+    <div style="display: inline">
+      <mat-icon
+        aria-hidden="false"
+        aria-label="Show settings"
+        fontIcon="expand_more"
+        [ngClass]="{ rotated: isAdvancedOpen }"
+      ></mat-icon>
+    </div>
   </div>
   <div class="row">
     <div id="advanced-container" class="col-md-2 col-12" *ngIf="isAdvancedOpen">
@@ -53,12 +66,15 @@
       <div
         class="row"
         cdkDropList
-        cdkDropListOrientation="mixed"
+        #tasks="cdkDropList"
+        [cdkDropListData]="taskList"
+        [cdkDropListConnectedTo]="[scheduledTasks]"
         (cdkDropListDropped)="drop($event)"
       >
         <div
           *ngFor="let task of taskList"
           [ngClass]="getColSize(task.time)"
+          (cdkDragMoved)="moved($event)"
           cdkDrag
         >
           <div class="task" [ngStyle]="{ 'background-color': task.color }">
@@ -68,19 +84,47 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-    <div class="col-1 tl"></div>
-  </div>
+  <div class="timeline-container">
+    <!-- Hour time markers -->
+    <div class="major-markers">
+      <div
+        *ngFor="let marker of hourMarkers"
+        class="major-marker"
+        [style.left.%]="(marker * 100) / 6"
+      >
+        {{ marker }} PM
+      </div>
+    </div>
 
+    <!-- Half hour tick marks-->
+    <div class="tick-line">
+      <div
+        *ngFor="let tick of halfHourTicks"
+        class="tick"
+        [style.left.%]="(tick * 100) / 12"
+      ></div>
+    </div>
+
+    <div
+      class="row scheduled-tasks"
+      cdkDropList
+      #scheduledTasks="cdkDropList"
+      cdkDropListOrientation="mixed"
+      [cdkDropListData]="droppedEvents"
+      cdkDropListSortingDisabled="true"
+      (cdkDropListDropped)="onEventDrop($event)"
+    >
+      <div
+        *ngFor="let task of droppedEvents"
+        class="scheduled-task"
+        [ngStyle]="{ 'background-color': task.color }"
+        [style.width.%]="((task.time / 30) * 100) / 12"
+        cdkDrag
+        [style.left.%]="getSnappedPosition(task)"
+        (cdkDragDropped)="changePosition($event, task)"
+      >
+        {{ task.text }}
+      </div>
+    </div>
+  </div>
 </div>

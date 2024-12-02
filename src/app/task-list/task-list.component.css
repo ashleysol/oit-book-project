@@ -89,3 +89,63 @@ input:focus{
   background-color: #FFF7E7;
   height: 200px;
 }
+
+/* Container for the entire timeline */
+.timeline-container {
+  height:100px;
+}
+
+/* Hour markers */
+.major-markers {
+  height: 20px; /* Adjust the height of the markers */
+  position: relative;
+  border-bottom: 1px solid #ccc;
+}
+
+.major-marker {
+  position: absolute;
+  transform: translateX(-50%);
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Line with tick marks */
+.tick-line {
+  height: 20px; /* Adjust for tick line height */
+  position: relative;
+  border-bottom: 1px solid #ccc;
+}
+
+.tick {
+  position: absolute;
+  height: 10px;
+  width: 1px;
+  background-color: #333;
+}
+
+
+.cdk-drag-preview {
+  border: 2px dashed #ccc;
+  background: #fafafa;
+}
+
+.cdk-drag-placeholder {
+  opacity: 0.5;
+}
+
+.row{
+  margin:0;
+}
+
+.scheduled-tasks{
+  position: relative;
+  height:100%;
+  background-color: rgb(250, 246, 224);
+}
+
+.scheduled-task{
+  height:80%;
+  position:absolute;
+  background-color: rgb(250, 246, 224);
+}
