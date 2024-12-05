@@ -48,6 +48,16 @@ export class TaskListComponent {
   constructor(private weatherService: WeatherService, private dbService: DatabaseService){}
 
   ngOnInit(){
+    this.dbService.addUser({
+      username: 'newUser',
+      email: 'newUser@example.com',
+      password: 'password123',
+    }).subscribe(response => {
+      console.log('User added:', response);
+    });
+    
+
+
     //Get weather location or display default location weather
     this.setWeather();
     // Set taskList to tasks in storage if they exists

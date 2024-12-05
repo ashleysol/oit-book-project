@@ -13,6 +13,22 @@ app.use(express.json());
 
 //Add a new user
 
+app.post('/api/users', (req, res) => {
+  const { username, email, password } = req.body;
+  const sql = 'INSERT INTO users (username, email, password) VALUES (?, ?, ?)';
+  db.query(sql, [username, email, password], (err, results) => {
+    if (err) {
+      console.error('Error inserting user:', err);
+      res.status(500).json({ message: 'Error adding user' });
+    } else {
+      res.status(201).json({ message: 'User added', userId: results.insertId });
+    }
+  });
+});
+
+
+
+
 // Fetch all tasks with user ID
 
 // Add a new task
